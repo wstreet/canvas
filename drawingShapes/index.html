@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="150" height="150"></canvas>
+</body>
+
+<script>
+    // 获取canvas标签
+    const canvas = document.getElementById('canvas');
+    // 获取2D渲染上下文CanvasRenderingContext2D
+    const ctx = canvas.getContext('2d');
+    // 填充颜色
+    ctx.fillStyle = "blue";
+    // 绘制矩形
+    ctx.fillRect(25, 25, 100, 100);
+    // 擦除矩形
+    ctx.clearRect(45, 45, 60, 60);
+    // 描边矩形
+    ctx.strokeRect(50, 50, 50, 50);
+
+
+
+
+
+</script>
+
+</html>
