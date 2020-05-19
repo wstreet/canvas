@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="150" height="150"></canvas>
+    <canvas id="canvas" width="500" height="1000 "></canvas>
 </body>
 
 <script>
@@ -25,6 +25,74 @@
     ctx.strokeRect(50, 50, 50, 50);
 
 
+    // 描边三角形
+    ctx.beginPath();
+    ctx.moveTo(150, 100);
+    ctx.lineTo(200, 100);
+    ctx.lineTo(200, 150);
+    ctx.closePath();
+    ctx.strokeStyle = "yellow"
+    ctx.stroke();
+
+    // 填充三角形
+    ctx.beginPath();
+    ctx.moveTo(200, 50);
+    ctx.lineTo(250, 50);
+    ctx.lineTo(250, 100);
+    ctx.closePath()
+    ctx.fillStyle = "#ccc"
+    ctx.fill();
+
+    // 笑脸
+    ctx.beginPath();
+    ctx.arc(50, 300, 50, 0, Math.PI * 2, true); // 绘制
+    ctx.strokeStyle = "#23eedf"
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(85, 310);
+    ctx.arc(50, 310, 35, 0, Math.PI, false);   // 口(顺时针)
+    ctx.strokeStyle = "red"
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(30, 290);
+    ctx.arc(25, 290, 5, 0, Math.PI * 2, true);  // 左眼
+    ctx.moveTo(80, 290);
+    ctx.arc(75, 290, 5, 0, Math.PI * 2, true);  // 右眼
+    ctx.strokeStyle = "blue"
+    ctx.stroke();
+
+    // arcTo
+    ctx.beginPath();
+    ctx.moveTo(150, 350)
+    ctx.arcTo(250, 350, 250, 450, 50)
+    ctx.stroke();
+
+
+    // 二次贝塞尔曲线
+    ctx.beginPath();
+    ctx.moveTo(100, 500);
+    ctx.quadraticCurveTo(150, 550, 200, 500);
+    ctx.stroke();
+
+    // 三次贝塞尔曲线
+    ctx.beginPath();
+    ctx.moveTo(100, 600);
+    ctx.quadraticCurveTo(150, 650, 200, 650, 250, 600);
+    ctx.stroke();
+
+    // 矩形
+    ctx.beginPath();
+    ctx.moveTo(100, 600);
+    ctx.rect(300, 600, 50, 50)
+    ctx.stroke();
+
+    // Path2D
+    const circle = new Path2D();
+    circle.moveTo(200, 750);
+    circle.arc(150, 750, 50, 0, 2 * Math.PI, true);
+    ctx.fill(circle);
 
 
 
