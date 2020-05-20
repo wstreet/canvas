@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500 "></canvas>
+</body>
+
+<script>
+    // 获取canvas标签
+    const canvas = document.getElementById('canvas');
+    // 获取2D渲染上下文CanvasRenderingContext2D
+    const ctx = canvas.getContext('2d');
+
+
+    // 线型
+    // lineWidth
+    ctx.beginPath()
+    ctx.moveTo(10, 10)
+    ctx.lineTo(10, 100)
+    ctx.lineWidth = 6
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.moveTo(20, 10)
+    ctx.lineTo(20, 100)
+    ctx.lineWidth = 10
+    ctx.stroke()
+
+    // lineCap
+    drawLineCap()
+    function drawLineCap() {
+        const lineCap = ['butt', 'round', 'square'];
+        // 创建路径
+        ctx.strokeStyle = '#09f';
+        ctx.beginPath();
+        ctx.moveTo(40, 10);
+        ctx.lineTo(180, 10);
+        ctx.stroke();
+        // 画线条
+        ctx.strokeStyle = 'black';
+        for (let i = 0; i < lineCap.length; i++) {
+            ctx.lineWidth = 15;
+            ctx.lineCap = lineCap[i];
+            ctx.beginPath();
+            ctx.moveTo(65 + i * 50, 10);
+            ctx.lineTo(65 + i * 50, 140);
+            ctx.stroke();
+        }
+    }
+
+    // lineJoin
+    drawLineJoin()
+    function drawLineJoin() {
+        const lineJoin = ['round', 'bevel', 'miter'];
+        ctx.lineWidth = 10;
+        for (let i = 0; i < lineJoin.length; i++) {
+            ctx.lineJoin = lineJoin[i];
+            ctx.beginPath();
+            ctx.moveTo(10, 160 + i * 40);
+            ctx.lineTo(50, 200 + i * 40);
+            ctx.lineTo(90, 160 + i * 40);
+            ctx.lineTo(135, 200 + i * 40);
+            ctx.lineTo(195, 160 + i * 40);
+            ctx.stroke();
+        }
+    }
+
+
+    var offset = 0;
+    ctx.lineWidth = 1;
+    function draw() {
+        ctx.clearRect(20, 300, canvas.width, canvas.height);
+        ctx.setLineDash([2, 4]);
+        ctx.lineDashOffset = -offset;
+        ctx.strokeRect(20, 300, 50, 50);
+    }
+
+    function march() {
+        offset++;
+        if (offset > 200) {
+            offset = 0;
+        }
+        draw();
+        requestAnimationFrame(march)
+    }
+
+    march();
+
+</script>
+
+</html>
