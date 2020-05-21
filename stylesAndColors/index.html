@@ -72,8 +72,9 @@
 
 
     var offset = 0;
-    ctx.lineWidth = 1;
+
     function draw() {
+        ctx.lineWidth = 1;
         ctx.clearRect(20, 300, canvas.width, canvas.height);
         ctx.setLineDash([2, 4]);
         ctx.lineDashOffset = -offset;
@@ -90,6 +91,44 @@
     }
 
     march();
+
+
+    drawGradient()
+    function drawGradient() {
+        const lineargradient = ctx.createLinearGradient(300, 0, 400, 0);
+        lineargradient.addColorStop(0, 'red');
+        lineargradient.addColorStop(1, 'yellow');
+
+        ctx.fillStyle = lineargradient
+        ctx.fillRect(300, 10, 100, 100)
+    }
+
+    drawPattern()
+    function drawPattern() {
+        // 创建新 image 对象，用作图案
+        const img = new Image();
+        img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png';
+        img.onload = function () {
+            // 创建图案
+            const ptrn = ctx.createPattern(img, 'repeat');
+            ctx.fillStyle = ptrn;
+            ctx.fillRect(300, 150, 100, 100);
+        }
+    }
+
+
+    drawShadow()
+    function drawShadow() {
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 1;
+        ctx.shadowColor = "#333";
+
+        ctx.font = "20px Times New Roman";
+        ctx.fillStyle = "Black";
+        ctx.fillText("Sample String", 300, 300);
+    }
+
 
 </script>
 
