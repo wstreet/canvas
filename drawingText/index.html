@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500 "></canvas>
+</body>
+
+<script>
+    // 获取canvas标签
+    const canvas = document.getElementById('canvas');
+    // 获取2D渲染上下文CanvasRenderingContext2D
+    const ctx = canvas.getContext('2d');
+
+    function drawText1() {
+        ctx.font = "48px serif";
+        ctx.fillText("Hello world", 10, 50);
+    }
+
+    function drawText2() {
+        ctx.font = "48px serif";
+        ctx.strokeText("Hello world", 10, 100);
+    }
+
+    function drawMeasureText() {
+        const text = ctx.measureText("foo"); // TextMetrics object
+        text.width; // 16;
+        console.log(text)
+    }
+
+    drawText1()
+    drawText2()
+    drawMeasureText()
+
+</script>
+
+</html>
