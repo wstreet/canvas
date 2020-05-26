@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="800 "></canvas>
+</body>
+
+<script>
+    // 获取canvas标签
+    const canvas = document.getElementById('canvas');
+    // 获取2D渲染上下文CanvasRenderingContext2D
+    const ctx = canvas.getContext('2d');
+
+    draw()
+    function draw() {
+
+        ctx.fillRect(0, 0, 150, 150);   // 使用默认设置绘制一个矩形
+        ctx.save();                  // 保存默认状态
+
+        ctx.fillStyle = '#09F'       // 在原有配置基础上对颜色做改变
+        ctx.fillRect(15, 15, 120, 120); // 使用新的设置绘制一个矩形
+
+        ctx.save();                  // 保存当前状态
+        ctx.fillStyle = '#FFF'       // 再次改变颜色配置
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(30, 30, 90, 90);   // 使用新的配置绘制一个矩形
+
+        ctx.restore();               // 重新加载之前的颜色状态
+        ctx.fillRect(45, 45, 60, 60);   // 使用上一次的配置绘制一个矩形
+
+        ctx.restore();               // 加载默认颜色配置
+        ctx.fillRect(60, 60, 30, 30);   // 使用加载的配置绘制一个矩形
+    }
+
+
+    drawTranslate()
+    function drawTranslate() {
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                ctx.save(); // 保存初始状态
+                ctx.fillStyle = 'rgb(' + (51 * i) + ', ' + (255 - 51 * i) + ', 255)';
+                ctx.translate(10 + j * 50, 200 + i * 50);
+                ctx.fillRect(0, 0, 25, 25);
+                ctx.restore(); // 恢复初始状态
+            }
+        }
+    }
+
+
+    drawRotate()
+    function drawRotate() {
+        ctx.translate(75, 400);
+        for (var i = 1; i < 6; i++) { // Loop through rings (from inside to out)
+            ctx.save();
+            ctx.fillStyle = 'rgb(' + (51 * i) + ',' + (255 - 51 * i) + ',255)';
+
+            for (var j = 0; j < i * 4; j++) { // draw individual dots
+                ctx.rotate(Math.PI * 2 / (i * 4));
+                ctx.beginPath();
+                ctx.arc(0, i * 12.5, 5, 0, Math.PI * 2, true);
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+    }
+
+    drawScale()
+    function drawScale() {
+        ctx.save();
+        ctx.scale(2, 2);
+        ctx.font = '48px serif';
+        ctx.fillText('MDN', 50, 50);
+        ctx.restore();
+
+        ctx.scale(1, 1);
+        ctx.font = '48px serif';
+        ctx.fillText('MDN', 50, 60);
+    }
+
+
+    // 参数：
+    // a (m11)：水平方向的缩放
+    // b (m12)：水平方向的倾斜偏移
+    // c (m21)：竖直方向的倾斜偏移
+    // d (m22)：竖直方向的缩放
+    // e (dx)：水平方向的移动
+    // f (dy)：竖直方向的移动
+    drawTransform()
+    function drawTransform() {
+        const sin = Math.sin(Math.PI / 6);
+        const cos = Math.cos(Math.PI / 6);
+        ctx.translate(100, 100);
+        let c = 0;
+        for (var i = 0; i <= 12; i++) {
+            c = Math.floor(255 / 12 * i);
+            ctx.fillStyle = "rgb(" + c + "," + c + "," + c + ")";
+            ctx.fillRect(10, 30, 100, 10);
+            ctx.transform(cos, sin, -sin, cos, 0, 0);
+        }
+
+        ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+        ctx.setTransform(1, 0, 0, 1, 0, 500);
+        ctx.fillRect(0, 50, 100, 100);
+
+    }
+</script>
+
+</html>
