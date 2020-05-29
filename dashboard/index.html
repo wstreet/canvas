@@ -55,15 +55,18 @@
         || window.mozRequestAnimationFrame
         || function (fn) { setTimeout(fn, 16.7) }
 
+    const cancelAnimationFrame = window.cancelAnimationFrame
+        || window.mozRequestAnimationFrame
+        || clearTimeout;
+
     // 初始化位置
     ctx.translate(200, 200)
 
     function draw() {
-        initValue += 1
-        if (initValue > value) {
-            initValue = value
-        }
 
+        if (initValue < value) {
+            initValue += 1
+        }
         // 计算旋转角度
         const angle = getAngle(initValue)
 
